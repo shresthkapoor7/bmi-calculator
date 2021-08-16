@@ -6,6 +6,8 @@ class InputPage extends StatefulWidget {
   _InputPageState createState() => _InputPageState();
 }
 
+_Container obj = new _Container();
+
 class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
@@ -17,62 +19,49 @@ class _InputPageState extends State<InputPage> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.all(20.0),
+          Expanded(
             child: Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: HexColor('#1D1F33'),
-                  ),
-                  height: 200,
-                  width: 150,
-                  child: Text(''),
-                ),
-                SizedBox(width: 20),
-                Container(
-                  // decoration: BoxDecoration(),
-                  height: 200,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: HexColor('#1D1F33'),
-                  ),
-                  child: Text(''),
-                ),
+                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
+                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
               ],
             ),
           ),
-          Container(
-            height: 200,
-            width: 320,
-            color: HexColor('#1D1F33'),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20.0),
+          Expanded(child: obj.element(180, 340, '#1D1F33', '')),
+          Expanded(
             child: Row(
               children: [
-                Container(
-                  //decoration: BoxDecoration(),
-                  height: 200,
-                  width: 150,
-                  color: HexColor('#1D1F33'),
-                  child: Text(''),
-                ),
-                SizedBox(width: 20),
-                Container(
-                  // decoration: BoxDecoration(),
-                  height: 200,
-                  width: 150,
-                  color: HexColor('#1D1F33'),
-                  child: Text(''),
-                ),
+                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
+                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
               ],
             ),
           ),
+          obj.element(70, 500, '#EB1555', 'CALCULATE'),
         ],
       ),
+    );
+  }
+}
+
+class _Container {
+  int height = 0;
+  int width = 0;
+  _Container();
+  Container element(double h, double w, String c, String t) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: HexColor('$c'),
+      ),
+      height: h,
+      width: w,
+      child: TextButton(
+          onPressed: () {},
+          child: Text(
+            '$t',
+            style: TextStyle(color: Colors.white, fontSize: 15),
+          )),
     );
   }
 }
