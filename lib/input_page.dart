@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'customClass.dart';
+
+container obj = new container();
 
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
-
-_Container obj = new _Container();
 
 class _InputPageState extends State<InputPage> {
   @override
@@ -22,46 +24,69 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
-                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
+                Expanded(
+                    child: obj.element(180, 150, color,
+                        CustomClass(FontAwesomeIcons.mars, 'MALE'))),
+                Expanded(
+                    child: obj.element(180, 150, color,
+                        CustomClass(FontAwesomeIcons.venus, 'FEMALE'))),
               ],
             ),
           ),
-          Expanded(child: obj.element(180, 340, '#1D1F33', '')),
+          Expanded(
+              child: obj.element(
+                  180,
+                  340,
+                  color,
+                  Column(children: [
+                    Icon(
+                      FontAwesomeIcons.mars,
+                      size: 80,
+                    ),
+                    Text('MALE')
+                  ]))),
           Expanded(
             child: Row(
               children: [
-                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
-                Expanded(child: obj.element(180, 150, '#1D1F33', '')),
+                Expanded(
+                    child: obj.element(
+                        180,
+                        150,
+                        color,
+                        Column(children: [
+                          Icon(
+                            FontAwesomeIcons.mars,
+                            size: 80,
+                          ),
+                          Text('MALE')
+                        ]))),
+                Expanded(
+                    child: obj.element(
+                        180,
+                        150,
+                        color,
+                        Column(children: [
+                          Icon(
+                            FontAwesomeIcons.mars,
+                            size: 80,
+                          ),
+                          Text('MALE')
+                        ]))),
               ],
             ),
           ),
-          obj.element(70, 500, '#EB1555', 'CALCULATE'),
+          Container(
+              height: 70,
+              width: double.infinity,
+              color: HexColor('#EB1555'),
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'CALCULATE',
+                    style: TextStyle(fontSize: 15, color: Color(0xFFFFFFFF)),
+                  ))),
         ],
       ),
-    );
-  }
-}
-
-class _Container {
-  int height = 0;
-  int width = 0;
-  _Container();
-  Container element(double h, double w, String c, String t) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: HexColor('$c'),
-      ),
-      height: h,
-      width: w,
-      child: TextButton(
-          onPressed: () {},
-          child: Text(
-            '$t',
-            style: TextStyle(color: Colors.white, fontSize: 15),
-          )),
     );
   }
 }
