@@ -3,14 +3,24 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'customClass.dart';
 
-container obj = new container();
-
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleColor = inactiveCardColor;
+  Color femaleColor = inactiveCardColor;
+  void changeColor(int gender) {
+    if (gender == 1) {
+      maleColor = activeCardColor;
+      femaleColor = inactiveCardColor;
+    } else {
+      femaleColor = activeCardColor;
+      maleColor = inactiveCardColor;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,58 +35,63 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                    child: obj.element(180, 150, color,
-                        CustomClass(FontAwesomeIcons.mars, 'MALE'))),
+                    child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      changeColor(1);
+                    });
+                  },
+                  child: ReusableCard(
+                      height: 180,
+                      width: 150,
+                      colour: maleColor,
+                      cC: CustomClass(FontAwesomeIcons.mars, 'MALE')),
+                )),
                 Expanded(
-                    child: obj.element(180, 150, color,
-                        CustomClass(FontAwesomeIcons.venus, 'FEMALE'))),
+                    child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      changeColor(2);
+                    });
+                  },
+                  child: ReusableCard(
+                      height: 180,
+                      width: 150,
+                      colour: femaleColor,
+                      cC: CustomClass(FontAwesomeIcons.venus, 'FEMALE')),
+                )),
               ],
             ),
           ),
           Expanded(
-              child: obj.element(
-                  180,
-                  340,
-                  color,
-                  Column(children: [
-                    Icon(
-                      FontAwesomeIcons.mars,
-                      size: 80,
-                    ),
-                    Text('MALE')
-                  ]))),
+            child: ReusableCard(
+              height: 180,
+              width: 340,
+              colour: activeCardColor,
+            ),
+          ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                    child: obj.element(
-                        180,
-                        150,
-                        color,
-                        Column(children: [
-                          Icon(
-                            FontAwesomeIcons.mars,
-                            size: 80,
-                          ),
-                          Text('MALE')
-                        ]))),
+                  child: ReusableCard(
+                    height: 180,
+                    width: 150,
+                    colour: activeCardColor,
+                  ),
+                ),
                 Expanded(
-                    child: obj.element(
-                        180,
-                        150,
-                        color,
-                        Column(children: [
-                          Icon(
-                            FontAwesomeIcons.mars,
-                            size: 80,
-                          ),
-                          Text('MALE')
-                        ]))),
+                  child: ReusableCard(
+                    height: 180,
+                    width: 150,
+                    colour: activeCardColor,
+                  ),
+                ),
               ],
             ),
           ),
           Container(
-              height: 70,
+              height: 50,
               width: double.infinity,
               color: HexColor('#EB1555'),
               child: TextButton(
