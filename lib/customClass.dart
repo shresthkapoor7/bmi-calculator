@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 const String color = '#1D1F33';
 const activeCardColor = Color(0xFF1D1E33);
