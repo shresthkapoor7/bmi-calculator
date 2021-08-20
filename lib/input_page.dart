@@ -30,35 +30,32 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                    child: GestureDetector(
-                  onTap: () {
+                    child: ReusableCard(
+                  height: 180,
+                  width: 150,
+                  colour: selectGender == gender.male
+                      ? activeCardColor
+                      : inactiveCardColor,
+                  cC: CustomClass(FontAwesomeIcons.mars, 'MALE'),
+                  F: () {
                     setState(() {
                       selectGender = gender.male;
                     });
                   },
-                  child: ReusableCard(
-                      height: 180,
-                      width: 150,
-                      colour: selectGender == gender.male
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      cC: CustomClass(FontAwesomeIcons.mars, 'MALE')),
                 )),
                 Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectGender = gender.female;
-                    });
-                  },
-                  child: ReusableCard(
-                      height: 180,
-                      width: 150,
-                      colour: selectGender == gender.female
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      cC: CustomClass(FontAwesomeIcons.venus, 'FEMALE')),
-                )),
+                    child: ReusableCard(
+                        height: 180,
+                        width: 150,
+                        colour: selectGender == gender.female
+                            ? activeCardColor
+                            : inactiveCardColor,
+                        cC: CustomClass(FontAwesomeIcons.venus, 'FEMALE'),
+                        F: () {
+                          setState(() {
+                            selectGender = gender.female;
+                          });
+                        })),
               ],
             ),
           ),

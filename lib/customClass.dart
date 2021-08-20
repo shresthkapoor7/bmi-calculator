@@ -26,22 +26,26 @@ class CustomClass extends StatelessWidget {
 }
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({this.colour, this.height, this.width, this.cC});
+  ReusableCard({this.colour, this.height, this.width, this.cC, this.F});
   final Color colour;
   final double height;
   final double width;
   final Widget cC;
+  final Function F;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: colour,
+    return GestureDetector(
+      onTap: F,
+      child: Container(
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: colour,
+        ),
+        height: height,
+        width: width,
+        child: cC,
       ),
-      height: height,
-      width: width,
-      child: cC,
     );
   }
 }
