@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'customClass.dart';
+import 'constants.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ enum gender {
   male,
   female,
 }
+double _currentSliderValue = 120;
+String height = _currentSliderValue.toStringAsFixed(0);
 
 class _InputPageState extends State<InputPage> {
   gender selectGender;
@@ -25,6 +28,7 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -34,8 +38,8 @@ class _InputPageState extends State<InputPage> {
                   height: 180,
                   width: 150,
                   colour: selectGender == gender.male
-                      ? activeCardColor
-                      : inactiveCardColor,
+                      ? kactiveCardColor
+                      : kinactiveCardColor,
                   cC: CustomClass(FontAwesomeIcons.mars, 'MALE'),
                   F: () {
                     setState(() {
@@ -48,8 +52,8 @@ class _InputPageState extends State<InputPage> {
                         height: 180,
                         width: 150,
                         colour: selectGender == gender.female
-                            ? activeCardColor
-                            : inactiveCardColor,
+                            ? kactiveCardColor
+                            : kinactiveCardColor,
                         cC: CustomClass(FontAwesomeIcons.venus, 'FEMALE'),
                         F: () {
                           setState(() {
@@ -63,7 +67,43 @@ class _InputPageState extends State<InputPage> {
             child: ReusableCard(
               height: 180,
               width: 340,
-              colour: activeCardColor,
+              colour: kactiveCardColor,
+              cC: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'HEIGHT',
+                    style: klabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        '$height',
+                        style: kheightTextStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: klabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                      activeColor: Color(0xFFEB1555),
+                      inactiveColor: Color(0xFF6D6E7B),
+                      value: _currentSliderValue,
+                      min: 120,
+                      max: 220,
+                      onChanged: (double value) {
+                        setState(() {
+                          _currentSliderValue = value;
+                          height = _currentSliderValue.toStringAsFixed(0);
+                        });
+                      }),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -73,14 +113,14 @@ class _InputPageState extends State<InputPage> {
                   child: ReusableCard(
                     height: 180,
                     width: 150,
-                    colour: activeCardColor,
+                    colour: kactiveCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     height: 180,
                     width: 150,
-                    colour: activeCardColor,
+                    colour: kactiveCardColor,
                   ),
                 ),
               ],
@@ -89,7 +129,7 @@ class _InputPageState extends State<InputPage> {
           Container(
               height: 50,
               width: double.infinity,
-              color: HexColor('#EB1555'),
+              color: Color(0xFFEB1555),
               child: TextButton(
                   onPressed: () {},
                   child: Text(

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-const String color = '#1D1F33';
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const labelTextStyle = TextStyle(fontSize: 18, color: Color(0xFF8D8E98));
+import 'constants.dart';
 
 class CustomClass extends StatelessWidget {
   CustomClass(this.icon, this.text);
@@ -19,7 +15,7 @@ class CustomClass extends StatelessWidget {
       SizedBox(height: 15),
       Text(
         '$text',
-        style: labelTextStyle,
+        style: klabelTextStyle,
       )
     ]);
   }
