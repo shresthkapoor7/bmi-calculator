@@ -15,6 +15,10 @@ enum gender {
 }
 double _currentSliderValue = 120;
 String height = _currentSliderValue.toStringAsFixed(0);
+double _weight = 50;
+String weight = _weight.toStringAsFixed(0);
+double _age = 18;
+String age = _age.toStringAsFixed(0);
 
 class _InputPageState extends State<InputPage> {
   gender selectGender;
@@ -124,6 +128,42 @@ class _InputPageState extends State<InputPage> {
                     height: 180,
                     width: 150,
                     colour: kactiveCardColor,
+                    cC: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: klabelTextStyle,
+                        ),
+                        Text(
+                          '$weight',
+                          style: kheightTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RoundIconButton(
+                              cC: Icon(Icons.add),
+                              oP: () {
+                                setState(() {
+                                  _weight++;
+                                  weight = _weight.toStringAsFixed(0);
+                                });
+                              },
+                            ),
+                            RoundIconButton(
+                              cC: Icon(Icons.remove),
+                              oP: () {
+                                setState(() {
+                                  _weight--;
+                                  weight = _weight.toStringAsFixed(0);
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
@@ -131,6 +171,39 @@ class _InputPageState extends State<InputPage> {
                     height: 180,
                     width: 150,
                     colour: kactiveCardColor,
+                    cC: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: klabelTextStyle,
+                        ),
+                        Text('$age', style: kheightTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RoundIconButton(
+                              cC: Icon(Icons.add),
+                              oP: () {
+                                setState(() {
+                                  _age++;
+                                  age = _age.toStringAsFixed(0);
+                                });
+                              },
+                            ),
+                            RoundIconButton(
+                              cC: Icon(Icons.remove),
+                              oP: () {
+                                setState(() {
+                                  _age--;
+                                  age = _age.toStringAsFixed(0);
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -151,3 +224,41 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
+
+class RoundIconButton extends StatelessWidget {
+  final Widget cC;
+  final Function oP;
+  RoundIconButton({this.cC, this.oP});
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      constraints: BoxConstraints.tightFor(height: 56.0, width: 56.0),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      onPressed: oP,
+      child: cC,
+      elevation: 0,
+    );
+  }
+}
+
+// class RoundIconButton extends StatefulWidget {
+//   @override
+//   _RoundIconButtonState createState() => _RoundIconButtonState();
+// }
+
+// class _RoundIconButtonState extends State<RoundIconButton> {
+//   final Widget cC;
+//   RoundIconButton({this.cC});
+//   @override
+//   Widget build(BuildContext context) {
+//     return RawMaterialButton(
+//       constraints: BoxConstraints.tightFor(height: 56.0, width: 56.0),
+//       shape: CircleBorder(),
+//       fillColor: Color(0xFF4C4F5E),
+//       onPressed: () {},
+//       child: cC,
+//       elevation: 0,
+//     );
+//   }
+// }
