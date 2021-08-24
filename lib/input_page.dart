@@ -1,8 +1,11 @@
+import 'package:bmi_calculator/finalpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'customClass.dart';
 import 'constants.dart';
+import 'finalpage.dart';
+import 'dart:math';
 
 class InputPage extends StatefulWidget {
   @override
@@ -13,12 +16,19 @@ enum gender {
   male,
   female,
 }
-double _currentSliderValue = 120;
-String height = _currentSliderValue.toStringAsFixed(0);
+double _height = 120;
+String height = _height.toStringAsFixed(0);
 double _weight = 50;
 String weight = _weight.toStringAsFixed(0);
 double _age = 18;
 String age = _age.toStringAsFixed(0);
+int h = 0;
+int w = 0;
+double _bmi = (w / pow(h, 2)) * 10000;
+String bmi = _bmi.toStringAsFixed(0);
+String overview;
+Color overviewColor;
+String written;
 
 class _InputPageState extends State<InputPage> {
   gender selectGender;
@@ -106,13 +116,13 @@ class _InputPageState extends State<InputPage> {
                         overlayShape:
                             RoundSliderOverlayShape(overlayRadius: 30.0)),
                     child: Slider(
-                        value: _currentSliderValue,
+                        value: _height,
                         min: 120,
                         max: 220,
                         onChanged: (double value) {
                           setState(() {
-                            _currentSliderValue = value;
-                            height = _currentSliderValue.toStringAsFixed(0);
+                            _height = value;
+                            height = _height.toStringAsFixed(0);
                           });
                         }),
                   ),
@@ -210,11 +220,37 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-              height: 50,
+              height: 60,
               width: double.infinity,
               color: Color(0xFFEB1555),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      h = int.parse(height);
+                      w = int.parse(weight);
+                      _bmi = (w / pow(h, 2)) * 10000;
+                      if (_bmi >= 18.5) {
+                        if (_bmi >= 25) {
+                          overview = 'OVERWEIGHT';
+                          overviewColor = Colors.red;
+                          written = 'You have more than normal body weight';
+                        } else {
+                          overview = 'NORMAL';
+                          overviewColor = Colors.green;
+                          written = 'You have a normal body weight. Good Job!';
+                        }
+                      } else {
+                        overview = 'UNDERWEIGHT';
+                        overviewColor = Colors.blue;
+                        written = 'You have less than normal body weight';
+                      }
+                      bmi = _bmi.toStringAsFixed(1);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Profile()),
+                      );
+                    });
+                  },
                   child: Text(
                     'CALCULATE',
                     style: TextStyle(fontSize: 15, color: Color(0xFFFFFFFF)),
